@@ -20,9 +20,11 @@ export class ShoppingListService {
     }
 
     addIngredients(ingredients: Ingredient[]) {
-        ingredients.forEach(element => {
+        /* ingredients.forEach(element => {
+            console.log(this.ingredients.find(ingredient => ingredient.name == element.name));
             this.ingredients.push(element);
-        });
+        }); */
+        this.ingredients.push(...ingredients);
         this.ingredientsUpdated.emit(this.ingredients);
     }
 
