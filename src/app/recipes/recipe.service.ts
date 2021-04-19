@@ -13,28 +13,16 @@ export class RecipeService {
             'Indian Traditional Dish',
             'https://www.indianhealthyrecipes.com/wp-content/uploads/2019/11/samosa-recipe-480x270.jpg',
             [
-                {
-                    name: 'white flour',
-                    quantity: 1
-                },
-                {
-                    name: 'potatoes',
-                    quantity: 2
-                }
+                { name: 'white flour', quantity: 1 },
+                { name: 'potatoes', quantity: 2 }
             ]),
         new Recipe(
             'Chole',
             'Indian Traditional Dish',
-            'https://www.indianhealthyrecipes.com/wp-content/uploads/2019/11/samosa-recipe-480x270.jpg',
+            'https://www.zeelskitchen.com/wp-content/uploads/2014/12/Chole-1.jpg',
             [
-                {
-                    name: 'Chole',
-                    quantity: 100
-                },
-                {
-                    name: 'salt',
-                    quantity: 1
-                }
+                { name: 'Chole', quantity: 100 },
+                { name: 'salt', quantity: 1 }
             ])
     ];
 
