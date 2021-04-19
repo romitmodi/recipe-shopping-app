@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'recipe-shopping-app';
-
-  currentTab:String='Recipe';
-
-  onTabClick(tabName:string){
-    this.currentTab=tabName;
-  }
 }
