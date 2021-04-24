@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Recipe } from '../../recipe.model';
 
 @Component({
@@ -11,11 +10,7 @@ export class RecipeItemComponent implements OnInit {
 
   @Input() recipe: Recipe;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void { }
-
-  onRecipeSelection() {
-    this.router.navigate(['recipes', this.recipe.name]);
-  }
 }
