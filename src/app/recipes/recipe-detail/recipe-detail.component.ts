@@ -16,8 +16,6 @@ export class RecipeDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const name = this.activatedRoute.snapshot.params['name'];
-    this.recipeDetail = this.recipeService.getRecipeByName(name);
     this.activatedRoute.params.subscribe(
       (param: Params) => {
         this.recipeDetail = this.recipeService.getRecipeByName(param['name']);
