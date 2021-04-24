@@ -5,7 +5,6 @@ import { Recipe } from "./recipe.model";
     providedIn: 'root'
 })
 export class RecipeService {
-    recipeSelectedEvent = new EventEmitter<Recipe>();
 
     private recipes: Array<Recipe> = [
         new Recipe(
@@ -30,5 +29,15 @@ export class RecipeService {
 
     getRecipes(): Array<Recipe> {
         return this.recipes.slice();
+    }
+
+    getRecipeByName(name: string): Recipe {
+        return this.recipes.find(
+            (recipe: Recipe) => {
+                if (name === recipe.name) {
+                    return recipe;
+                }
+            }, null
+        );
     }
 }
