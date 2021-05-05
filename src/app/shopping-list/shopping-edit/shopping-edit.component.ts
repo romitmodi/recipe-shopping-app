@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared-model/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 
@@ -8,13 +9,30 @@ import { ShoppingListService } from '../shopping-list.service';
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   @ViewChild('ingredientForm') ingredientForm: NgForm;
 
+  subscription: Subscription;
+  editMode: boolean = false;
+  editedIndex: number;
+  editIngredient: Ingredient;
+
   constructor(private shoppingListService: ShoppingListService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.subscription = this.shoppingListService.ingredientSelected
+      .subscribe((index: number) => {
+        this.editMode = true;
+        this.editedIndex = index;
+        this.editIngredient = this.shoppingListService.getIngredient(index);
+        this.ingredientForm.setValue({
+          name: this.editIngredient.name,
+          quantity: this.editIngredient.quantity
+        });
+      }
+      );
+  }
 
   onAddIngredientAsInput(form: NgForm): void {
     console.log(form);
@@ -24,8 +42,16 @@ export class ShoppingEditComponent implements OnInit {
   }
 
   onAddIngredient(): void {
-    console.log(this.ingredientForm);
+    console.log(this.editMode);
     const ingredient = new Ingredient(this.ingredientForm.value.name, this.ingredientForm.value.quantity)
-    this.shoppingListService.addIngredient(ingredient);
+    if (this.editMode) {
+      this.shoppingListService.updateIngredient(this.editedIndex, ingredient);
+    } else {
+      this.shoppingListService.addIngredient(ingredient);
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
