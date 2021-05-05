@@ -21,17 +21,22 @@ export class ShoppingListService {
 
     addIngredient(ingredient: Ingredient) {
         this.ingredients.push(ingredient);
-        this.ingredientsUpdated.next(this.ingredients);
+        this.ingredientsUpdated.next(this.ingredients.slice());
     }
 
     addIngredients(ingredients: Ingredient[]) {
         this.ingredients.push(...ingredients);
-        this.ingredientsUpdated.next(this.ingredients);
+        this.ingredientsUpdated.next(this.ingredients.slice());
     }
 
     updateIngredient(index: number, updateIngredient: Ingredient) {
         this.ingredients[index] = updateIngredient;
-        this.ingredientsUpdated.next(this.ingredients);
+        this.ingredientsUpdated.next(this.ingredients.slice());
+    }
+
+    deleteIngredient(index: number) {
+        this.ingredients.splice(index, 1);
+        this.ingredientsUpdated.next(this.ingredients.slice());
     }
 
 }

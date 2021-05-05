@@ -29,10 +29,17 @@
                             [disabled]="ingredientForm.invalid">
                             {{editMode?'Update':'Add'}}
                     </button>
-                    <button class="btn btn-danger" type="button">delete</button>
+                    <button class="btn btn-danger"
+                            type="button"
+                            (click)="onDelettion()"
+                            *ngIf="editMode">
+                            delete
+                    </button>
                     <button class="btn btn-primary"
-                            type="reset"
-                            (click)="onClear()">clear</button>
+                            type="button"
+                            (click)="onClear()">
+                            clear
+                    </button>
                 </div>
             </div>
         </form>
