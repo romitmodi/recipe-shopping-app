@@ -61,21 +61,29 @@
                             </div>
                         </div>
                         <br />
-                        <div class="row">
-                            <div class="col-xs-9">
-                                <input type="text"
-                                       id="ingredientName"
-                                       class="form-control" />
-                            </div>
-                            <div class="col-xs-2">
-                                <input type="number"
-                                       id="quantity"
-                                       class="form-control" />
-                            </div>
-                            <div class="col-xs-1">
-                                <button class="btn btn-danger"
-                                        type="button"
-                                        id="deleteIngredients">X</button>
+                        <div class="row" >
+                            <div class="col-xs-12" formArrayName="ingredients">
+                                <div class="row"
+                                    *ngFor="let ingredient of getIngredientControls(); let i=index;"
+                                    [formGroupName]="i">
+                                    <div class="col-xs-9">
+                                        <input type="text"
+                                            id="ingredientName"
+                                            class="form-control" 
+                                            formControlName="name"/>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <input type="number"
+                                            id="quantity"
+                                            class="form-control"
+                                            formControlName="quantity" />
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <button class="btn btn-danger"
+                                                type="button"
+                                                id="deleteIngredients">X</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
