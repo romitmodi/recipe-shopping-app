@@ -10,7 +10,7 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeEditComponent implements OnInit {
 
-  name: string;
+  index: number;
   editMode: boolean = false;
   recipeDetailForm: FormGroup;
 
@@ -22,8 +22,8 @@ export class RecipeEditComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         (param: Params) => {
-          this.name = param['name'];
-          this.editMode = param['name'] != null;
+          this.index = +param['id'];
+          this.editMode = param['id'] != null;
           this.initForm();
         }
       );
@@ -36,7 +36,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
-      const recipe = this.recipeService.getRecipeByName(this.name);
+      const recipe = this.recipeService.getRecipeByIndex(this.index);
       recipeName = recipe.name;
       recipeDescription = recipe.description;
       imagePath = recipe.imagePath;
@@ -81,13 +81,13 @@ export class RecipeEditComponent implements OnInit {
     console.log(this.recipeDetailForm.value);
     if (this.editMode) {
       this.editMode = false;
-      this.route.navigate(['recipes', this.name]);
+      this.route.navigate(['recipes', this.index]);
     }
   }
 
   onCancel() {
     this.editMode = false;
-    this.route.navigate(['recipes', this.name]);
+    this.route.navigate(['recipes', this.index]);
   }
 
   onDeleteIngredient(index: number) {
