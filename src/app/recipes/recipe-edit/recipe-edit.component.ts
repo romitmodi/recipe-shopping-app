@@ -42,7 +42,9 @@ export class RecipeEditComponent implements OnInit {
       imagePath = recipe.imagePath;
       if (recipe['ingredients']) {
         for (let ingredient of recipe.ingredients) {
-          recipeIngredients.push(this.setIngredient(ingredient.name, ingredient.quantity));
+          recipeIngredients.push(
+            this.setIngredient(ingredient.name, ingredient.quantity)
+          );
         }
       }
     }
@@ -60,7 +62,9 @@ export class RecipeEditComponent implements OnInit {
 
   onAddIngredient() {
     (<FormArray>this.recipeDetailForm.get('ingredients'))
-      .push(this.setIngredient(null, null));
+      .push(
+        this.setIngredient(null, null)
+      );
   }
 
   private setIngredient(name: string, quantity: number): FormGroup {
