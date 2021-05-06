@@ -1,1 +1,83 @@
-<p>recipe-edit works!</p>
+<div class="row">
+    <div class="col-xs-12">
+        <form>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-danger" type="button">Cancel</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text"
+                               id="name"
+                               class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="imagePath">Image Path</label>
+                        <input type="text"
+                               id="imagePath"
+                               class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <img src=""
+                             alt=""
+                             class="img-responsive">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description"
+                                  rows="6"
+                                  type="text"
+                                  class="form-control">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="ingredients">Ingredients</label>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="btn btn-success">Add Ingredients</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <input type="text"
+                                       id="ingredientName"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-xs-2">
+                                <input type="number"
+                                       id="quantity"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-xs-1">
+                                <button class="btn btn-danger"
+                                        type="button"
+                                        id="deleteIngredients">X</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
