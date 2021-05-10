@@ -9,24 +9,24 @@ import { Recipe } from "./recipe.model";
 })
 export class RecipeService {
 
-    private recipes: Array<Recipe> = [
-        new Recipe(
-            'Samosa',
-            'Indian Traditional Dish',
-            'https://www.indianhealthyrecipes.com/wp-content/uploads/2019/11/samosa-recipe-480x270.jpg',
-            [
-                { name: 'white flour', quantity: 1 },
-                { name: 'potatoes', quantity: 2 }
-            ]),
-        new Recipe(
-            'Chole',
-            'Indian Traditional Dish',
-            'https://www.zeelskitchen.com/wp-content/uploads/2014/12/Chole-1.jpg',
-            [
-                { name: 'Chole', quantity: 100 },
-                { name: 'salt', quantity: 1 }
-            ])
-    ];
+    private recipes: Array<Recipe> = [];
+    //     new Recipe(
+    //         'Samosa',
+    //         'Indian Traditional Dish',
+    //         'https://www.indianhealthyrecipes.com/wp-content/uploads/2019/11/samosa-recipe-480x270.jpg',
+    //         [
+    //             { name: 'white flour', quantity: 1 },
+    //             { name: 'potatoes', quantity: 2 }
+    //         ]),
+    //     new Recipe(
+    //         'Chole',
+    //         'Indian Traditional Dish',
+    //         'https://www.zeelskitchen.com/wp-content/uploads/2014/12/Chole-1.jpg',
+    //         [
+    //             { name: 'Chole', quantity: 100 },
+    //             { name: 'salt', quantity: 1 }
+    //         ])
+    // ];
 
     recipeChanged = new Subject<Array<Recipe>>();
 
