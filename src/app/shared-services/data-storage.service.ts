@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { RecipeService } from "../recipes/recipe.service";
 import { environment } from "src/environments/environment";
@@ -25,7 +25,7 @@ export class DataStorageService {
     }
 
     fetchRecipe() {
-        this.httpClient
+        return this.httpClient
             .get<Recipe[]>(environment.backendUrl + 'recipes.json')
             .pipe(map(recipes => {
                 return recipes.map(recipe => {
@@ -40,9 +40,8 @@ export class DataStorageService {
                         return recpieOne.name.localeCompare(recipeTwo.name)
                     });
                 return recipes;
-            }))
-            .subscribe(recipes => {
+            }), tap(recipes => {
                 this.recipeService.setRecipes(recipes);
-            })
+            }));
     }
 }
