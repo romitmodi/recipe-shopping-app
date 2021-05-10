@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { RecipeService } from "../recipes/recipe.service";
 import { environment } from "src/environments/environment";
+import { Recipe } from "../recipes/recipe.model";
 
 @Injectable({
     providedIn: "root"
@@ -22,6 +23,11 @@ export class DataStorageService {
     }
 
     fetchRecipe() {
-
+        this.httpClient
+            .get<Recipe[]>(environment.backendUrl + 'recipes.json')
+            .subscribe(recipes => {
+                console.log(recipes);
+                this.recipeService.setRecipes(recipes);
+            })
     }
 }
