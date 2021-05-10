@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  backendUrl: 'https://shopping-recipe-app-backend-default-rtdb.asia-southeast1.firebasedatabase.app/'
 };
 
 /*
