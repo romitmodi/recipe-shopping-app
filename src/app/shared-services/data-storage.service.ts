@@ -34,6 +34,12 @@ export class DataStorageService {
                         ingredients: recipe.ingredients ? recipe.ingredients : []
                     }
                 })
+            }), map(recipes => {
+                recipes.sort(
+                    (recpieOne, recipeTwo) => {
+                        return recpieOne.name.localeCompare(recipeTwo.name)
+                    });
+                return recipes;
             }))
             .subscribe(recipes => {
                 this.recipeService.setRecipes(recipes);
