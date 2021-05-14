@@ -1,23 +1,31 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <form>
+        <form (ngSubmit)="onSubmit()"
+              #form="ngForm">
             <div class="row form-group">
                 <label for="email">Email</label>
                 <input type="text"
                        name="email"
                        id="email"
-                       class="form-control" />
+                       class="form-control"
+                       ngModel
+                       required
+                       email />
             </div>
             <div class="row form-group">
                 <label for="password">Password</label>
                 <input type="password"
                        name="password"
                        id="password"
-                       class="form-control">
+                       class="form-control"
+                       ngModel
+                       required
+                       minlength="6">
             </div>
             <div>            
                 <button type="submit" 
-                        class="btn btn-primary">
+                        class="btn btn-primary"
+                        [disabled]="form.invalid">
                         {{isLoginMode? 'Login': 'Sign Up'}}
                 </button> |
                 <button type="button" 
