@@ -9,6 +9,7 @@ import { AuthService } from "./auth.service";
 export class AuthComponent {
 
     @ViewChild('form') authForm: NgForm;
+
     isLoginMode = true;
     isLoading = false;
     error = null;
@@ -39,7 +40,7 @@ export class AuthComponent {
             },
             error => {
                 console.log(error);
-                this.error = 'An error is occured!!' + error.message;
+                this.error = error;
                 this.isLoading = false;
             });
     }
