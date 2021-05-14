@@ -20,7 +20,6 @@ export class AuthComponent {
     }
 
     onSubmit() {
-        console.log(this.authForm.value);
         const email = this.authForm.value['email'];
         const password = this.authForm.value['password'];
         this.isLoading = true;
@@ -29,7 +28,6 @@ export class AuthComponent {
         } else {
             this.onSignup(email, password);
         }
-        this.isLoading = false;
         this.authForm.reset();
     }
 
@@ -37,10 +35,12 @@ export class AuthComponent {
         this.authService.onUserSignUp(email, password).subscribe(
             authResponseData => {
                 console.log(authResponseData);
+                this.isLoading = false;
             },
             error => {
                 console.log(error);
                 this.error = 'An error is occured!!' + error.message;
+                this.isLoading = false;
             });
     }
 
