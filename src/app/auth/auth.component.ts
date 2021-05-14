@@ -43,6 +43,7 @@ export class AuthComponent {
                 console.log(error);
                 this.error = error;
                 this.isLoading = false;
-            });
+            }
+        );
     }
 }
