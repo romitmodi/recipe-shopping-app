@@ -1,7 +1,9 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
         <form (ngSubmit)="onSubmit()"
-              #form="ngForm">
+              #form="ngForm"
+              *ngIf="!isLoading">
             <div class="row form-group">
                 <label for="email">Email</label>
                 <input type="text"
@@ -35,5 +37,10 @@
                 </button>
             </div>
         </form>
+        <div class="row alert alert-danger" *ngIf="error">
+            <p>
+                {{error}}
+            </p>
+        </div>
     </div>
 </div>

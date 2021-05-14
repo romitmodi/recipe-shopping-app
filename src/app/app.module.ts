@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeDeleteComponent } from './recipes/recipe-delete/recipe-delete.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared-component/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AuthComponent } from './auth/auth.component';
     DropDownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    RecipeDeleteComponent
+    RecipeDeleteComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
