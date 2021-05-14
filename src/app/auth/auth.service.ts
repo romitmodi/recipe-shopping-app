@@ -4,12 +4,13 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
-interface AuthResponseData {
+export interface AuthResponseData {
     idToken: string,
     emaild: string,
     refreshToken: string,
     expiresIn: string,
-    localId: string
+    localId: string,
+    registered?: boolean
 }
 
 @Injectable({ providedIn: 'root' })
@@ -20,16 +21,34 @@ export class AuthService {
     constructor(private httpClient: HttpClient) { }
 
     onUserSignUp(email: string, password: string): Observable<AuthResponseData> {
-        return this.httpClient
-            .post<AuthResponseData>(
+        return this.authObservableHandler(
+            this.httpClient.post<AuthResponseData>(
                 environment.authSignUpUrl + this.authKey,
                 {
                     'email': email,
                     'password': password,
                     'returnSecureToken': true
                 }
-            ).pipe(catchError(errorResponse => {
-                console.log(errorResponse);
+            )
+        );
+    }
+
+    userLoginRequest(email: string, password: string): Observable<AuthResponseData> {
+        return this.authObservableHandler(
+            this.httpClient.post<AuthResponseData>(
+                environment.authLoginUrl + this.authKey,
+                {
+                    'email': email,
+                    'password': password,
+                    'returnSecureToken': true
+                }
+            )
+        );
+    }
+
+    private authObservableHandler(authObservable: Observable<AuthResponseData>): Observable<AuthResponseData> {
+        return authObservable.pipe(
+            catchError(errorResponse => {
                 let errorMessage = 'An unknown error has occured';
                 if (errorResponse.error && errorResponse.error.error) {
                     switch (errorResponse.error.error.message) {
@@ -42,14 +61,18 @@ export class AuthService {
                         case 'TOO_MANY_ATTEMPTS_TRY_LATER':
                             errorMessage = 'Multiple invalid attempt has been done in short span of time. Please retry later.';
                             break;
+                        case 'INVALID_PASSWORD':
+                        case 'EMAIL_NOT_FOUND':
+                            errorMessage = 'Email or password is incorrect.';
+                            break;
+                        case 'USER_DISABLED':
+                            errorMessage = 'User is disabled by Adminstrator. Please check with support.';
+                            break;
                     }
                 }
                 return throwError(errorMessage);
-            }));
-    }
-
-    userLoginRequest(email: string, password: string) {
-        return this.httpClient;
+            })
+        );
     }
 
 }
