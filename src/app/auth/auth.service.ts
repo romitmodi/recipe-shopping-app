@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
@@ -21,7 +22,8 @@ export class AuthService {
 
     private authKey = 'AIzaSyA43wOLGsexRwOfb5xrgjGb3sgKmIIpmME';
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient,
+        private router: Router) { }
 
     onUserSignUp(email: string, password: string) {
         return this.httpClient.post<AuthResponseData>(
@@ -43,6 +45,11 @@ export class AuthService {
                 'returnSecureToken': true
             }
         ).pipe(catchError(this.handleError), tap(data => this.handleAuthentication(data)));
+    }
+
+    logout() {
+        this.user.next(null);
+        this.router.navigate(['auth']);
     }
 
     private handleAuthentication(responseData: AuthResponseData) {
