@@ -18,9 +18,9 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    user = new BehaviorSubject<User>(null);
-
     private authKey = 'AIzaSyA43wOLGsexRwOfb5xrgjGb3sgKmIIpmME';
+
+    user = new BehaviorSubject<User>(null);
 
     constructor(private httpClient: HttpClient,
         private router: Router) { }
@@ -59,7 +59,7 @@ export class AuthService {
             userData.id,
             userData._token,
             new Date(userData._tokenExpirationDate));
-        console.log(user);
+
         if (user.token) {
             this.user.next(user);
         }
@@ -68,6 +68,11 @@ export class AuthService {
     logout() {
         this.user.next(null);
         this.router.navigate(['auth']);
+        localStorage.removeItem('userData');
+    }
+
+    autoLogout() {
+
     }
 
     private handleAuthentication(responseData: AuthResponseData) {
