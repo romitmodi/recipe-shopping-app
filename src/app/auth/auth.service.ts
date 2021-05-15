@@ -31,7 +31,7 @@ export class AuthService {
                 'password': password,
                 'returnSecureToken': true
             }
-        ).pipe(catchError(this.handleError), tap(this.handleAuthentication));
+        ).pipe(catchError(this.handleError), tap(data => this.handleAuthentication(data)));
     }
 
     userLoginRequest(email: string, password: string) {
@@ -42,7 +42,7 @@ export class AuthService {
                 'password': password,
                 'returnSecureToken': true
             }
-        ).pipe(catchError(this.handleError), tap(this.handleAuthentication));
+        ).pipe(catchError(this.handleError), tap(data => this.handleAuthentication(data)));
     }
 
     private handleAuthentication(responseData: AuthResponseData) {
@@ -51,7 +51,6 @@ export class AuthService {
             responseData.localId,
             responseData.idToken,
             expirationDate);
-        console.log(user);
         this.user.next(user);
     }
 
