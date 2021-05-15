@@ -30,11 +30,7 @@ export class DataStorageService {
         return this.authService.user.pipe(
             take(1),
             exhaustMap(user => {
-                return this.httpClient.get<Recipe[]>(
-                    environment.backendUrl + 'recipes.json',
-                    {
-                        params: new HttpParams().set('auth', user.token)
-                    });
+                return this.httpClient.get<Recipe[]>(environment.backendUrl + 'recipes.json');
             }),
             map(recipes => {
                 return recipes
