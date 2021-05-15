@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
 
 import { RecipeService } from "../recipes/recipe.service";
 import { environment } from "src/environments/environment";
 import { Recipe } from "../recipes/recipe.model";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({
     providedIn: "root"
@@ -12,7 +13,8 @@ import { Recipe } from "../recipes/recipe.model";
 export class DataStorageService {
 
     constructor(private httpClient: HttpClient,
-        private recipeService: RecipeService) { }
+        private recipeService: RecipeService,
+        private authService: AuthService) { }
 
     storeRecipes() {
         const recipes = this.recipeService.getRecipes();
@@ -25,23 +27,30 @@ export class DataStorageService {
     }
 
     fetchRecipe() {
-        return this.httpClient
-            .get<Recipe[]>(environment.backendUrl + 'recipes.json')
-            .pipe(map(recipes => {
-                return recipes.map(recipe => {
-                    return {
-                        ...recipe,
-                        ingredients: recipe.ingredients ? recipe.ingredients : []
-                    }
-                })
-            }), map(recipes => {
-                recipes.sort(
-                    (recpieOne, recipeTwo) => {
-                        return recpieOne.name.localeCompare(recipeTwo.name)
+        return this.authService.user.pipe(
+            take(1),
+            exhaustMap(user => {
+                return this.httpClient.get<Recipe[]>(
+                    environment.backendUrl + 'recipes.json',
+                    {
+                        params: new HttpParams().set('auth', user.token)
                     });
-                return recipes;
-            }), tap(recipes => {
+            }),
+            map(recipes => {
+                return recipes
+                    .map(recipe => {
+                        return {
+                            ...recipe,
+                            ingredients: recipe.ingredients ? recipe.ingredients : []
+                        };
+                    })
+                    .sort((recpieOne, recipeTwo) => {
+                        return recpieOne.name.localeCompare(recipeTwo.name);
+                    });
+            }),
+            tap(recipes => {
                 this.recipeService.setRecipes(recipes);
-            }));
+            })
+        );
     }
 }

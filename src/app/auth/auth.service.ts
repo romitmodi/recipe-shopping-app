@@ -1,13 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subject, throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { User } from "./user.model";
 
 export interface AuthResponseData {
     idToken: string,
-    emaild: string,
+    email: string,
     refreshToken: string,
     expiresIn: string,
     localId: string,
@@ -17,7 +17,7 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    user = new Subject<User>();
+    user = new BehaviorSubject<User>(null);
 
     private authKey = 'AIzaSyA43wOLGsexRwOfb5xrgjGb3sgKmIIpmME';
 
@@ -47,7 +47,7 @@ export class AuthService {
 
     private handleAuthentication(responseData: AuthResponseData) {
         const expirationDate = new Date(new Date().getTime() + +responseData.expiresIn * 1000);
-        const user = new User(responseData.emaild,
+        const user = new User(responseData.email,
             responseData.localId,
             responseData.idToken,
             expirationDate);
