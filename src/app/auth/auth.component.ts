@@ -28,9 +28,9 @@ export class AuthComponent {
         const password = this.authForm.value['password'];
         this.isLoading = true;
         if (this.isLoginMode) {
-            this.authObservableHandler(this.authService.userLoginRequest(email, password));
+            this.authObservableHandler(this.authService.login(email, password));
         } else {
-            this.authObservableHandler(this.authService.onUserSignUp(email, password))
+            this.authObservableHandler(this.authService.signUp(email, password))
         }
         this.authForm.reset();
     }

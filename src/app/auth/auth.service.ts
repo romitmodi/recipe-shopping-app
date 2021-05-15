@@ -25,7 +25,7 @@ export class AuthService {
     constructor(private httpClient: HttpClient,
         private router: Router) { }
 
-    onUserSignUp(email: string, password: string) {
+    signUp(email: string, password: string) {
         return this.httpClient.post<AuthResponseData>(
             environment.authSignUpUrl + this.authKey,
             {
@@ -36,7 +36,7 @@ export class AuthService {
         ).pipe(catchError(this.handleError), tap(data => this.handleAuthentication(data)));
     }
 
-    userLoginRequest(email: string, password: string) {
+    login(email: string, password: string) {
         return this.httpClient.post<AuthResponseData>(
             environment.authLoginUrl + this.authKey,
             {
@@ -45,6 +45,24 @@ export class AuthService {
                 'returnSecureToken': true
             }
         ).pipe(catchError(this.handleError), tap(data => this.handleAuthentication(data)));
+    }
+
+    autoLogin() {
+        const userData: {
+            email: string,
+            id: string,
+            _token: string,
+            _tokenExpirationDate: string
+        } = JSON.parse(localStorage.getItem('userData'));
+
+        const user = new User(userData.email,
+            userData.id,
+            userData._token,
+            new Date(userData._tokenExpirationDate));
+        console.log(user);
+        if (user.token) {
+            this.user.next(user);
+        }
     }
 
     logout() {
@@ -59,6 +77,7 @@ export class AuthService {
             responseData.idToken,
             expirationDate);
         this.user.next(user);
+        localStorage.setItem('userData', JSON.stringify(user));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {
