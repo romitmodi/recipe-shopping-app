@@ -56,6 +56,9 @@ export class AuthService {
             _tokenExpirationDate: string
         } = JSON.parse(localStorage.getItem('userData'));
 
+        if (!userData) {
+            return;
+        }
         const user = new User(userData.email,
             userData.id,
             userData._token,
