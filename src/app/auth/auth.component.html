@@ -39,10 +39,13 @@
                 </button>
             </div>
         </form>
-        <div class="row alert alert-danger" *ngIf="error">
+        <app-alert *ngIf="error"
+                   [message]="error">
+        </app-alert>
+        <!-- <div class="row alert alert-danger" *ngIf="error">
             <p>
                 {{error}}
             </p>
-        </div>
+        </div> -->
     </div>
 </div>
