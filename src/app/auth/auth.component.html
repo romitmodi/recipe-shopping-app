@@ -40,7 +40,8 @@
             </div>
         </form>
         <app-alert *ngIf="error"
-                   [message]="error">
+                   [message]="error"
+                   (closeEvent)="onAlertCloseEvent()">
         </app-alert>
         <!-- <div class="row alert alert-danger" *ngIf="error">
             <p>

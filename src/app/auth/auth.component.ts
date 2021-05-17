@@ -48,4 +48,8 @@ export class AuthComponent {
             }
         );
     }
+
+    onAlertCloseEvent() {
+        this.error = null;
+    }
 }
