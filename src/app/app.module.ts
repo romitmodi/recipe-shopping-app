@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeModule } from './recipes/recipe.module';
@@ -20,7 +19,6 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     AppRoutingModule,
     RecipeModule,
