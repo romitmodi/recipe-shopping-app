@@ -5,7 +5,7 @@ import { exhaustMap, map, take, tap } from 'rxjs/operators';
 import { RecipeService } from "../../recipes/recipe.service";
 import { environment } from "src/environments/environment";
 import { Recipe } from "../../recipes/recipe.model";
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from "src/app/auth/services/auth.service";
 
 @Injectable({
     providedIn: "root"

@@ -8,11 +8,11 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { AuthInterceptorService } from './auth/auth-intercepter.service';
+import { AuthComponent } from './auth/component/auth.component';
+import { AuthInterceptorService } from './auth/services/auth-intercepter.service';
 
 @NgModule({
   declarations: [
