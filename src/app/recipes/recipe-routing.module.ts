@@ -1,6 +1,5 @@
-import { Route } from "@angular/compiler/src/core";
 import { NgModule } from "@angular/core";
-import { Router, RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../auth/auth-guard.service";
 import { RecipeDeleteComponent } from "./recipe-delete/recipe-delete.component";
 import { RecipeDetailComponent } from "./recipe-detail/recipe-detail.component";
