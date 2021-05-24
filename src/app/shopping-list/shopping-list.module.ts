@@ -5,7 +5,6 @@ import { SharedModule } from "../shared/shared.module";
 import { ShoppingEditComponent } from "./shopping-edit/shopping-edit.component";
 import { ShoppingListRoutingModule } from "./shopping-list-routing.module";
 import { ShoppingListComponent } from "./shopping-list.component";
-import { ShoppingListService } from "./shopping-list.service";
 
 @NgModule({
     declarations: [
@@ -13,7 +12,6 @@ import { ShoppingListService } from "./shopping-list.service";
         ShoppingEditComponent
     ],
     providers: [
-        ShoppingListService,
     ],
     imports: [
         SharedModule,
