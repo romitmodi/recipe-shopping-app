@@ -3,8 +3,8 @@ import { Route, RouterModule } from "@angular/router";
 
 const appRoute: Route[] = [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
-    { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule' },
-    { path: 'shoppingList', loadChildren: './shopping-list/shopping-list.module#ShoppingListModule' }
+    { path: 'recipes', loadChildren: () => import('./recipes/recipe.module').then(m => m.RecipeModule) },
+    { path: 'shoppingList', loadChildren: () => import('./shopping-list/shopping-list.module').then(m => m.ShoppingListModule) }
 ]
 
 @NgModule({
