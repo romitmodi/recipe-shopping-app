@@ -14,9 +14,6 @@ import { DataStorageService } from "./services/data-storage.service";
         PlaceholderDirective,
         DropDownDirective
     ],
-    providers: [
-        DataStorageService
-    ],
     imports: [
         CommonModule
     ],

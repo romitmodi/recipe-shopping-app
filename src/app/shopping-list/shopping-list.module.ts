@@ -11,8 +11,6 @@ import { ShoppingListComponent } from "./shopping-list.component";
         ShoppingListComponent,
         ShoppingEditComponent
     ],
-    providers: [
-    ],
     imports: [
         SharedModule,
         FormsModule,
