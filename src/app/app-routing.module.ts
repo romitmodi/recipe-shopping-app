@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { PreloadAllModules, PreloadingStrategy, Route, RouterModule } from "@angular/router";
+import { PreloadAllModules, Route, RouterModule } from "@angular/router";
 
 const appRoute: Route[] = [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
