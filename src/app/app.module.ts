@@ -7,6 +7,8 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    StoreModule.forRoot({ shoppingList: shoppingListReducer }),
     SharedModule
   ],
   bootstrap: [AppComponent]

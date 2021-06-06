@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
-import { throws } from "assert";
-import { throwError } from "rxjs";
-import { Ingredient } from "../shared/model/ingredient.model";
+
+import { Ingredient } from "../../shared/model/ingredient.model";
+import { ADD_INGREDIENT } from "../store/shopping-list.actions";
 
 const initalState = {
     ingredients: [
@@ -12,7 +12,7 @@ const initalState = {
 
 export function shoppingListReducer(state = initalState, action: Action) {
     switch (action.type) {
-        case "ADD_INGREDIENTS":
+        case ADD_INGREDIENT:
             return {
                 ...state,
                 ingredients: [...state.ingredients, action]
