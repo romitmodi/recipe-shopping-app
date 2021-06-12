@@ -13,7 +13,7 @@ export function shoppingListReducer(state = initalState, action: ShoppingListAct
         case ShoppingListActions.ADD_INGREDIENT:
             return {
                 ...state,
-                ingredients: [...state.ingredients, action]
+                ingredients: [...state.ingredients, action.payload]
             };
         default:
             console.log('incorrect acction triggered, which is not supported by application');
