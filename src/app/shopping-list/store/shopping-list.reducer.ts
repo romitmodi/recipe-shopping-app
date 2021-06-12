@@ -17,5 +17,6 @@ export function shoppingListReducer(state = initalState, action: ShoppingListAct
             };
         default:
             console.log('incorrect acction triggered, which is not supported by application');
+            return state;
     }
 }
